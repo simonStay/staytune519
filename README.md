@@ -16,16 +16,24 @@ Currently includes:
 
 ## Quick Start
 
+<<<<<<< HEAD
 ## For IOS App (Use ios branch)
 
 You should install the below frame works with the minimum versions we listed
 Here is the github url for ios version
 
+=======
+
+Run the IOS App
+You should install the below frame works with the minimum versions we listed 
+Here is the github url for ios version
+>>>>>>> refs/remotes/origin/master
 1. ReactNative 0.60.5
 2. React 16.8.6
 3. Node 12.13.1
 4. run "react-native link" command
 5. cd ios & run "pod install"
+<<<<<<< HEAD
 6. open the StayTune/ios/StayTune.xcworkspace in Xcode
 7. Click on Play button (Make sure you connected a ios device or simulator)
 8. App will open in iphone connected / Simulator
@@ -43,6 +51,26 @@ Here is the github url for Android version
 6. Go to root folder of project in terminal and and checkout to staytune_android branch and run "react-native start" command
 7. Run the “react-native run-android” command
 8. App will open in android mobile connected / Simulator
+=======
+6. open the StayTune/ios/StayTune.xcworkspace in Xcode	
+7. Click on Play button (Make sure you connected a ios device or simulator)	
+8. App will open in iphone connected / Simulator	
+ 
+ 
+Run the Android App
+You should install the below frame works with the minimum versions we listed 
+Here is the github url for Android version
+1. ReactNative 0.60.5
+2. React 16.8.6
+3. Node 12.13.1
+4. Open the Android studio and open the project  in android studio
+5. Run the Gradle synchronization. 
+6. Go to root folder of project in terminal and and checkout to staytune_android branch and run "react-native start" command
+7. Run the “react-native run-android” command 
+8. App will open in android mobile connected / Simulator	
+
+
+>>>>>>> refs/remotes/origin/master
 
 The Ignite Bowser boilerplate project's structure will look similar to this:
 
