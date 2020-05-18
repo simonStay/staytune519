@@ -26,7 +26,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -46,10 +46,6 @@
 	<string>$(PRODUCT_NAME) would like to use your camera</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>App requires background tracking</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>App requires your location tracking</string>
-	<key>NSLocationUsageDescription</key>
-	<string>App requires location tracking</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App requires background tracking</string>
 	<key>NSMicrophoneUsageDescription</key>

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, Alert } from "react-native"
+import { View, Alert, Platform } from "react-native"
 import { NavigationScreenProp, NavigationState } from "react-navigation"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import styles from "./styles"
@@ -155,8 +155,6 @@ class SetBudget extends Component<Props, UserInformation, extrainfo> {
       logsArray.push({ actionType })
       this.props.setBudgetLogEvents(logsArray)
     }
-
-
 
     if (this.state.travelDate == "" || this.state.travelDate == null) {
       Alert.alert(
@@ -335,8 +333,12 @@ class SetBudget extends Component<Props, UserInformation, extrainfo> {
         <GoldBarView />
         <KeyboardAwareScrollView
           ref="scrollView"
-          resetScrollToCoords={{ x: 0, y: 0 }}
+          resetScrollToCoords={{ x: 0, y: 1000 }}
+          enableAutomaticScroll
           extraScrollHeight={30}
+          enableOnAndroid={true}
+          extraHeight={30}
+          style={{ flexGrow: 1 }}
           scrollEnabled={true}
         >
           <Text style={styles.textStyle}>Travel Start Date</Text>

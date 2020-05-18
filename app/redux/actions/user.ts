@@ -15,7 +15,7 @@ export const SAVE_LOCATION_LOGS = "SAVE_LOCATION_LOGS"
 export const USER_CURRENT_LOCATION = "USER_CURRENT_LOCATION"
 export const NOTIFICATION_SIGN_OUT = "NOTIFICATION_SIGN_OUT"
 
-const STAYTUNELIVEURL = "https://staytune.austinconversionoptimization.com/"
+const STAYTUNELIVEURL = "https://api.staytune.co"
 
 export function signUp(firstname, lastname, email, password, zip, deviceId) {
   return async dispatch => {
@@ -23,7 +23,7 @@ export function signUp(firstname, lastname, email, password, zip, deviceId) {
       type: LOADER,
       payload: true,
     })
-    const res = await fetch(STAYTUNELIVEURL + `users`, {
+    const res = await fetch(STAYTUNELIVEURL + `/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export function signUp(firstname, lastname, email, password, zip, deviceId) {
         email: email,
         password: password,
         zip: zip,
-        deviceId: deviceId
+        deviceId: deviceId,
       }),
     })
     const body = await resToBody(res)
@@ -47,13 +47,13 @@ export function signUp(firstname, lastname, email, password, zip, deviceId) {
 }
 
 export function getNotification(preferenceId) {
-  const res = fetch(STAYTUNELIVEURL + `travel-preferencesNotifications`, {
+  const res = fetch(STAYTUNELIVEURL + `/travel-preferencesNotifications`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id: preferenceId
+      id: preferenceId,
     }),
   })
   //const body = resToBody(res)
@@ -67,7 +67,7 @@ export function Login(email, password, deviceId) {
       type: LOADER,
       payload: true,
     })
-    const res = await fetch(STAYTUNELIVEURL + `users/login`, {
+    const res = await fetch(STAYTUNELIVEURL + `/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export function Login(email, password, deviceId) {
       body: JSON.stringify({
         email: email,
         password: password,
-        deviceId: deviceId
+        deviceId: deviceId,
       }),
     })
     const body = await resToBody(res)
@@ -117,7 +117,7 @@ export function ChangePassword(user) {
       type: LOADER,
       payload: true,
     })
-    const res = await fetch(STAYTUNELIVEURL + `users/` + user.id, {
+    const res = await fetch(STAYTUNELIVEURL + `/users/` + user.id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -141,7 +141,7 @@ export function verifyUser(user) {
       type: LOADER,
       payload: true,
     })
-    const res = await fetch(STAYTUNELIVEURL + `users/` + user.id, {
+    const res = await fetch(STAYTUNELIVEURL + `/users/` + user.id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -165,7 +165,7 @@ export function ForgotPassword(email) {
       type: LOADER,
       payload: true,
     })
-    const res = await fetch(STAYTUNELIVEURL + `user/forgot-password`, {
+    const res = await fetch(STAYTUNELIVEURL + `/user/forgot-password`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -189,7 +189,7 @@ export function getUserDetails(userId, token) {
     //   type: LOADER,
     //   payload: true,
     // })
-    const res = await fetch(STAYTUNELIVEURL + `users/` + userId, {
+    const res = await fetch(STAYTUNELIVEURL + `/users/` + userId, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -211,7 +211,7 @@ export function createUserProfile(userInfoObj) {
       type: LOADER,
       payload: true,
     })
-    const res = await fetch(STAYTUNELIVEURL + `users/` + userInfoObj.userId, {
+    const res = await fetch(STAYTUNELIVEURL + `/users/` + userInfoObj.userId, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -251,7 +251,7 @@ export function getAvatarImages() {
 export function sendUserLocation(locationInfo) {
   return async dispatch => {
     console.log("sendUserLocation_action:", locationInfo)
-    const res = await fetch(STAYTUNELIVEURL + `users/userDetails`, {
+    const res = await fetch(STAYTUNELIVEURL + `/users/userDetails`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -261,14 +261,14 @@ export function sendUserLocation(locationInfo) {
         userName: locationInfo.userName,
         lat: locationInfo.lat,
         long: locationInfo.long,
-        id: locationInfo.id
+        id: locationInfo.id,
       }),
     })
     const body = await resToBody(res)
     console.log("sendUserLocation_123:", body)
     return dispatch({
       type: SEND_USER_LOCATION,
-      payload: body
+      payload: body,
     })
   }
 }
@@ -277,7 +277,7 @@ export function saveLocationLogs(saveLogs) {
   return async dispatch => {
     dispatch({
       type: SAVE_LOCATION_LOGS,
-      payload: saveLogs
+      payload: saveLogs,
     })
   }
 }
@@ -286,7 +286,7 @@ export function saveUserLocation(userLocation) {
   return async dispatch => {
     dispatch({
       type: USER_CURRENT_LOCATION,
-      payload: userLocation
+      payload: userLocation,
     })
   }
 }
@@ -298,7 +298,7 @@ export function updateUserLocation(user) {
     //   type: LOADER,
     //   payload: true,
     // })
-    const res = await fetch(STAYTUNELIVEURL + `users/` + user.userId, {
+    const res = await fetch(STAYTUNELIVEURL + `/users/` + user.userId, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -306,7 +306,7 @@ export function updateUserLocation(user) {
       body: JSON.stringify({
         lat: user.lat,
         long: user.long,
-        date: user.date
+        date: user.date,
       }),
     })
     const body = await resToBody(res)
@@ -324,13 +324,13 @@ export function selectedTourGuide(user) {
       type: LOADER,
       payload: true,
     })
-    const res = await fetch(STAYTUNELIVEURL + `users/` + user.userId, {
+    const res = await fetch(STAYTUNELIVEURL + `/users/` + user.userId, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        travelGuideId: user.travelGuideId
+        travelGuideId: user.travelGuideId,
       }),
     })
     const body = await resToBody(res)
@@ -369,5 +369,5 @@ export default {
   LOADER,
   SEND_USER_LOCATION,
   SAVE_LOCATION_LOGS,
-  USER_CURRENT_LOCATION
+  USER_CURRENT_LOCATION,
 }
