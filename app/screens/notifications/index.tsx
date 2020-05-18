@@ -46,11 +46,11 @@ class Notifications extends Component<Props, UserInformation> {
     if (this.props.preferenceId == null || this.props.preferenceId == "") {
       console.log("userId_123", userId)
       await this.props.notificationList(userId)
-      //console.log("notifications_screen_123_if:", this.props.notifications.userNotificationList)
+      // console.log("notifications_screen_123_if:", this.props.notifications.userNotificationList)
       await this.setState({ notificationsList: this.props.notifications.userNotificationList })
     } else {
       await this.props.getNotificationsByTravelId(this.props.preferenceId)
-      //console.log("notifications_screen_123_else:", this.props.notifications.notificationsByPreferenceId.data)
+      // console.log("notifications_screen_123_else:", this.props.notifications.notificationsByPreferenceId.data)
       await this.setState({ notificationsList: this.props.notifications.notificationsByPreferenceId.data })
     }
 

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { Component } from "react"
-import { View, Platform, Alert, AppRegistry, AsyncStorage, StatusBar } from "react-native"
+import { View, Platform, Alert, AppRegistry, AsyncStorage } from "react-native"
 import { NavigationScreenProp, NavigationState } from "react-navigation"
 import RouteScreen from "../../navigation/AppNavigation"
 import OneSignal from 'react-native-onesignal';
@@ -38,10 +38,6 @@ class AppContainer extends Component<Props, AppInfo> {
             userLat: '',
             userLong: ''
         }
-    }
-
-    componentDidMount() {
-        StatusBar.setHidden(true);
     }
 
     render() {

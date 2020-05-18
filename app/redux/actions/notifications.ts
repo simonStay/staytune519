@@ -6,6 +6,7 @@ export const LOADER_NOTIFICATION = "LOADER_NOTIFICATION"
 export const NOTIFICATIONS_BY_PREFERENCEID = "NOTIFICATIONS_BY_PREFERENCEID"
 
 const STAYTUNELIVEURL = "https://api.staytune.co"
+
 const GOOGLE_API_KEY = "AIzaSyBI_ae3Hvrib8Bao3_WrhXLEHKuGj1J8pQ"
 
 export function openNotification(value) {

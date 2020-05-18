@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Image, Keyboard, Alert, View, AsyncStorage, PermissionsAndroid, BackHandler } from "react-native"
+import { Image, Keyboard, Alert, View, AsyncStorage } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import { NavigationScreenProp, NavigationState } from "react-navigation"
 import { Wallpaper } from "../../components/wallpaper"
@@ -38,7 +38,6 @@ interface userDetails {
   longitude: any
   latitudeDelta: any
   longitudeDelta: any
-  handleBackButtonClick: any
 }
 
 class LoginScreen extends Component<Props, userDetails> {
@@ -56,35 +55,14 @@ class LoginScreen extends Component<Props, userDetails> {
       latitudeDelta: null,
       longitudeDelta: null,
     }
-    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-    // OneSignal.configure();
-    // OneSignal.addEventListener('ids', this.onIds);
     this.passwordInput = React.createRef()
   }
 
   async componentWillMount() {
-    // alert("didMount")
-    setTimeout(async () => {
-      await OneSignal.init('8d39b7db-d029-4bbd-af58-20e3f53cc4a9', {
-        kOSSettingsKeyAutoPrompt: true,
-        kOSSettingsKeyInFocusDisplayOption: 1
-      });
-    }, 2000);
     await OneSignal.addEventListener('ids', this.onIds.bind(this));
-    await BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-
-  handleBackButtonClick() {
-    console.log('handleBackButtonClick_handleBackButtonClick:', this.props.navigation.state);
-    //this.props.navigation.goBack(null);
-    if (this.props.navigation.isFocused()) {
-      BackHandler.exitApp();
-      return true;
-    }
   }
 
   async onIds(device) {
-    //alert("called")
     console.log('deviceId id: ', device.userId);
     this.setState({
       deviceId: device.userId
@@ -209,59 +187,23 @@ class LoginScreen extends Component<Props, userDetails> {
         }, 100)
       }
       else {
-        try {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-            {
-              'title': 'Staytune',
-              'message': 'Staytune App access to your location '
-            }
-          )
-          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log("You can use the location")
-            //alert("You can use the location");
-            await Geolocation.getCurrentPosition(async (position) => {
-              console.log("position_123", JSON.stringify(position))
-              this.setState({
-                latitude: await position.coords.latitude,
-                longitude: await position.coords.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              })
-              let locationInfo = {
-                userId: await this.props.user.login.id,
-                lat: await parseFloat(this.state.latitude),
-                long: await parseFloat(this.state.longitude),
-                date: moment().format("DD-MM-YYYYThh:mm:ss")
-              }
-              await console.log("position_locationInfo_123", JSON.stringify(locationInfo))
-              await this.props.updateUserLocation(locationInfo)
-            })
-          } else {
-            console.log("location permission denied")
-            alert("Location permission denied");
+        Geolocation.getCurrentPosition(async (position) => {
+          console.log("position_123", JSON.stringify(position))
+          this.setState({
+            latitude: await position.coords.latitude,
+            longitude: await position.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          })
+          let locationInfo = {
+            userId: await this.props.user.login.id,
+            lat: await parseFloat(this.state.latitude),
+            long: await parseFloat(this.state.longitude),
+            date: moment().format("DD-MM-YYYYThh:mm:ss")
           }
-        } catch (err) {
-          console.warn(err)
-        }
-
-        // await Geolocation.getCurrentPosition(async (position) => {
-        //   console.log("position_123", JSON.stringify(position))
-        //   this.setState({
-        //     latitude: await position.coords.latitude,
-        //     longitude: await position.coords.longitude,
-        //     latitudeDelta: 0.0922,
-        //     longitudeDelta: 0.0421,
-        //   })
-        //   let locationInfo = {
-        //     userId: await this.props.user.login.id,
-        //     lat: await parseFloat(this.state.latitude),
-        //     long: await parseFloat(this.state.longitude),
-        //     date: moment().format("DD-MM-YYYYThh:mm:ss")
-        //   }
-        //   await console.log("position_locationInfo_123", JSON.stringify(locationInfo))
-        //   await this.props.updateUserLocation(locationInfo)
-        // })
+          await console.log("position_locationInfo_123", JSON.stringify(locationInfo))
+          await this.props.updateUserLocation(locationInfo)
+        })
 
         this.setState({
           userId: this.props.user.login.id,
@@ -308,17 +250,19 @@ class LoginScreen extends Component<Props, userDetails> {
             keyboardType="email-address"
             returnKeyType="next"
             onSubmitEditing={() => this.passwordInput.current.focus()}
+
           />
           <TextField
-            forwardedRef={this.passwordInput}
             inputStyle={styles.inputStyle}
+            forwardedRef={this.passwordInput}
             placeholder="Enter your password"
             placeholderTextColor={color.placeholderText}
             secureTextEntry={true}
             onChangeText={value => this.setState({ password: value })}
             value={this.state.password}
             autoCapitalize="none"
-            onSubmitEditing={() => this.onLogin()}
+            returnKeyType="done"
+            onSubmitEditing={this.onLogin.bind(this)}
           />
           <Text
             style={styles.forgotPasswordText}
@@ -338,7 +282,6 @@ class LoginScreen extends Component<Props, userDetails> {
           <Button style={styles.button} onPress={this.onSignUp.bind(this)}>
             <Text style={styles.buttonText}>SIGN UP</Text>
           </Button>
-          <View style={{ height: 60 }} />
           <AnimatedLoader
             visible={this.props.user.loader}
             overlayColor="rgba(255,255,255,0.75)"

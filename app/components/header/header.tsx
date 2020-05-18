@@ -33,7 +33,7 @@ const TITLE: TextStyle = { textAlign: "center", color: '#E0B34A', fontSize: dime
 const TITLE_MIDDLE: ViewStyle = { flex: 1, alignItems: "center" }
 const LEFT: ViewStyle = { width: dimensions.width * 0.2 }
 const RIGHT: ViewStyle = { width: dimensions.width * 0.096 }
-const RIGHT_TITLE: TextStyle = { color: '#E0B34A', fontSize: dimensions.width * 0.048, alignSelf: 'center' }
+const RIGHT_TITLE: TextStyle = { color: '#E0B34A', fontSize: dimensions.width * 0.051, alignSelf: 'center' }
 
 /**
  * Header that appears on many screens. Will hold navigation buttons and screen title.

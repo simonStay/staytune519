@@ -113,7 +113,7 @@ class CustomComponent extends Component {
     selectedType = this.props.type == "Specialty" ? value : selectedType
     selectedType = this.props.type == "Question" ? value : selectedType
     let data = { value: value, trigger: 'Selected', selected: this.props.type == "categories" ? selectedValue : selectedType }
-    console.log("data_123", JSON.stringify(data))
+    //console.log("data_123", JSON.stringify(data))
     this.props.triggerNextStep(data);
   }
 
@@ -245,7 +245,7 @@ class Chat extends Component<Props, chatState> {
         ? this.props.user.login.id !== undefined ? this.props.user.login.id
           : this.props.user.userProfileInfo.data.id : this.props.user.userProfileInfo.data.id
     let userDetails = await this.props.getUserDetails(id, "token")
-    console.log("data_userDetails______123:", this.props.user.userDetails.travelGuideId)
+    //console.log("data_userDetails______123:", this.props.user.userDetails.travelGuideId)
     this.setState({
       travelGuideId: await userDetails.payload.travelGuideId
     })
@@ -278,7 +278,7 @@ class Chat extends Component<Props, chatState> {
       let guideInfo = await this.props.getTourGuideById(this.state.travelGuideId)
       //console.log("getGuideById__123:", guideInfo.payload.url)
       await this.setState({ tourGuidePic: guideInfo.payload.url === undefined ? 'https://image.flaticon.com/icons/png/512/149/149071.png' : guideInfo.payload.url })
-      console.log("user_123", JSON.stringify(this.props.user))
+      // console.log("user_123", JSON.stringify(this.props.user))
       await this.setState({
         steps: [
           {
@@ -429,7 +429,7 @@ class Chat extends Component<Props, chatState> {
 
   render() {
     // alert("height" + dimensions.height)
-    console.log("tourGuidePic_124:" + this.state.tourGuidePic)
+    // console.log("tourGuidePic_124:" + this.state.tourGuidePic)
     let avtarPic
     try {
       avtarPic = this.props.user.userDetails.profilePic == undefined ? 'https://image.flaticon.com/icons/png/512/149/149071.png' : this.props.user.userDetails.profilePic == '' ? 'https://image.flaticon.com/icons/png/512/149/149071.png' : this.props.user.userDetails.profilePic

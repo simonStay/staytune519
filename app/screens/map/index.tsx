@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, TouchableOpacity, FlatList, Modal, Image, ScrollView, Platform, Alert, TextInput, AsyncStorage, Keyboard, BackHandler } from "react-native"
+import { View, TouchableOpacity, FlatList, Modal, Image, ScrollView, Platform, Alert, TextInput, AsyncStorage, Keyboard } from "react-native"
 import { NavigationScreenProp, NavigationState } from "react-navigation"
 import { Text } from '../../components/text'
 import MapView, { Marker } from "react-native-maps"
@@ -88,9 +88,6 @@ class MapScreen extends Component<Props, MapScreen, {}> {
       showInitialModal: false,
       showModal: true
     }
-
-    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-
     Analytics.setAnalyticsCollectionEnabled(true);
     Analytics.logEvent('Home_screen', {
       group_id: '12345',
@@ -101,7 +98,6 @@ class MapScreen extends Component<Props, MapScreen, {}> {
 
   async UNSAFE_componentWillMount() {
     //alert(moment().format("DD-MM-YYYYThh:mm:ss"))
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
 
     Geolocation.getCurrentPosition(async (position) => {
       let location = {
@@ -146,7 +142,6 @@ class MapScreen extends Component<Props, MapScreen, {}> {
 
   async componentWillUnmount() {
     try {
-      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
       this.props.onRef(undefined)
     } catch (err) {
       console.log("map_onRef:", err)
@@ -157,13 +152,6 @@ class MapScreen extends Component<Props, MapScreen, {}> {
       showInitialModal: false,
       showModal: false
     })
-  }
-
-  handleBackButtonClick() {
-    //this.props.navigation.goBack(null);
-    console.log("handleBackButtonClick_123:")
-    BackHandler.exitApp();
-    return true;
   }
 
   closeModal() {
@@ -334,7 +322,7 @@ class MapScreen extends Component<Props, MapScreen, {}> {
     this.setState({ filteredResponse: [] })
     let region = this.state.region
     let FilteredData = await this.props.getFilterByType(type, region)
-    console.log("FilteredData_123", JSON.stringify(FilteredData))
+    // console.log("FilteredData_123", JSON.stringify(FilteredData))
     //alert("type_123:" + type)
     this.setState({
       selectedFilter: true,
@@ -555,23 +543,21 @@ class MapScreen extends Component<Props, MapScreen, {}> {
             showsUserLocation={true}
             initialRegion={this.state.region}
           >
-            {this.state.touristLocations != undefined ?
-              this.state.touristLocations.length > 0
-                ? this.state.touristLocations.map(location => {
-                  console.log("Location_123", JSON.stringify(location))
-                  return (
-                    <MapView.Marker
-                      coordinate={{
-                        latitude: location.geometry != undefined ? parseFloat(location.geometry.location.lat) : location.lat,
-                        longitude: location.geometry != undefined ? parseFloat(location.geometry.location.lng) : location.long,
-                      }}
-                      image={location.icon}
-                      title={location.name}
-                    />
-                  )
-                })
-                : null
-              : null}
+            {this.state.touristLocations != undefined ? this.state.touristLocations.length > 0
+              ? this.state.touristLocations.map(location => {
+                // console.log("Location_123", JSON.stringify(location))
+                return (
+                  <MapView.Marker
+                    coordinate={{
+                      latitude: location.geometry != undefined ? parseFloat(location.geometry.location.lat) : location.lat,
+                      longitude: location.geometry != undefined ? parseFloat(location.geometry.location.lng) : location.long,
+                    }}
+                    image={location.icon}
+                    title={location.name}
+                  />
+                )
+              })
+              : null : null}
           </MapView>
         ) : null}
         <SearchBar SearchValue={this.state.searchValue} onSearchValueChange={this.onSearchValueChange.bind(this)} places={this.state.places} onTouchStart={this.onTouchStart.bind(this)} />

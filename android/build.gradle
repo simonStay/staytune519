@@ -10,7 +10,6 @@ buildscript {
         googlePlayServicesVersion = "11+"
         androidMapsUtilsVersion = "0.5+"
     }
-
     repositories {
        google()
        jcenter()

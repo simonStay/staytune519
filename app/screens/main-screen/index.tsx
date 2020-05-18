@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { View, AsyncStorage, Keyboard, BackHandler } from "react-native"
+import { View, AsyncStorage, Keyboard } from "react-native"
 import { NavigationScreenProp, NavigationState } from "react-navigation"
 import styles from "./styles"
 import { Drawer } from "native-base"
@@ -95,18 +95,12 @@ class MainScreen extends Component<Props, UserInformation, extraInfo> {
       pid: '',
       notificationPreferenceId: "",
     }
-
-    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-
   }
 
 
   async componentWillMount() {
     // alert(dimensions.height)
-    console.log('in app.js:', this.props.navigation.state);
-
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-
+    console.log('in app.js:');
     setTimeout(async () => {
       await OneSignal.init('8d39b7db-d029-4bbd-af58-20e3f53cc4a9', {
         kOSSettingsKeyAutoPrompt: true,
@@ -131,29 +125,14 @@ class MainScreen extends Component<Props, UserInformation, extraInfo> {
     //   console.log('getUserId', id);
     // });
   }
-  // componentDidUpdate() {
-  //   BackHandler.exitApp()
-  // }
-
-  handleBackButtonClick() {
-    console.log('handleBackButtonClick_handleBackButtonClick:', this.props.navigation.state);
-    //this.props.navigation.goBack(null);
-    if (this.props.navigation.isFocused()) {
-      BackHandler.exitApp();
-      return true;
-    }
-  }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-
-    //OneSignal.removeEventListener('received', this.onReceived.bind(this));
-    //OneSignal.removeEventListener('opened', this.onOpened.bind(this));
-    //OneSignal.removeEventListener('ids', this.onIds.bind(this));
-    //OneSignal.removeEventListener('InAppMessageClicked', this.onInAppMessageClicked.bind(this));
+    OneSignal.removeEventListener('received', this.onReceived.bind(this));
+    OneSignal.removeEventListener('opened', this.onOpened.bind(this));
+    OneSignal.removeEventListener('ids', this.onIds.bind(this));
+    OneSignal.removeEventListener('InAppMessageClicked', this.onInAppMessageClicked.bind(this));
     //BackgroundGeolocation.removeAllListeners();
   }
-
   onInAppMessageClicked(notification) {
     console.log("notification_clicked", notification)
   }
@@ -259,21 +238,18 @@ class MainScreen extends Component<Props, UserInformation, extraInfo> {
         isOpen: false,
         modalVisible: false,
       })
-      //console.log("closeModal_123_if:", this.drawer)
-
     } else {
       this.drawer._root.open()
       this.setState({
         isOpen: true,
         modalVisible: false
       })
-      // console.log("closeModal_123_else:", this.drawer)
-
     }
     Keyboard.dismiss();
   }
 
   async closeDrawer(params) {
+    // alert("called")
     if (params == "Edit Profile") {
       this.setState({
         selectedValue: "Edit Profile",
@@ -482,7 +458,6 @@ class MainScreen extends Component<Props, UserInformation, extraInfo> {
       from: ''
     })
   }
-
   backClose() {
     this.setState({
       isOpen: false,
@@ -522,10 +497,10 @@ class MainScreen extends Component<Props, UserInformation, extraInfo> {
           <Drawer
             openDrawerOffset={0.36}
             panCloseMask={0.36}
-            onClose={() => this.backClose()}
             ref={ref => {
               this.drawer = ref
             }}
+            onClose={() => this.backClose()}
             content={
               <SideBar
                 navigation={this.props.navigation}
