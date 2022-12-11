@@ -6667,6 +6667,11 @@ open@^6.2.0:
   dependencies:
     is-wsl "^1.1.0"
 
+opencollective-postinstall@^2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
+  integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
+
 opencollective-postinstall@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
@@ -7428,15 +7433,10 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-qs@^5.2.0:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-5.2.1.tgz#801fee030e0b9450d6385adc48a4cc55b44aedfc"
-  integrity sha1-gB/uAw4LlFDWOFrcSKTMVbRK7fw=
-
-qs@^6.6.0:
-  version "6.9.1"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.1.tgz#20082c65cb78223635ab1a9eaca8875a29bf8ec9"
-  integrity sha512-Cxm7/SS/y/Z3MHWSxXb8lIFqgqBowP5JMlTUFyJN88y0SGQhVmZnqFK/PeuMX9LzUyWsqqhNxIyg0jlzq946yA==
+qs@^6.6.0, qs@~6.9.1:
+  version "6.9.7"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.7.tgz#4610846871485e1e048f44ae3b94033f0e675afe"
+  integrity sha512-IhMFgUmuNpyRfxA90umL7ByLlgRXu6tIfKPpF5TmcfRLlLCckfP/g3IQmju6jjpu+Hh8rA+2p6A27ZSPOOHdKw==
 
 qs@~6.5.2:
   version "6.5.2"
@@ -7629,6 +7629,14 @@ react-native-easy-grid@0.2.2, react-native-easy-grid@^0.2.2:
   dependencies:
     lodash "^4.17.15"
 
+react-native-firebase@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-5.6.0.tgz#6f6123f53cb73477915dd55c55f3e1de91db38d2"
+  integrity sha512-I+o3zNLdIz4pxWTCSZH70M1BcPl+SdqKQfurOT0sWcaMSL2ecDqVy0PCTmN7ORt7/Z879Er6PLgA/psjArQlmw==
+  dependencies:
+    opencollective-postinstall "^2.0.0"
+    prop-types "^15.7.2"
+
 react-native-gesture-handler@^1.3.0:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.5.3.tgz#191b44701fab7ba54c27a2438cb5eaa252666e66"
@@ -7659,14 +7667,14 @@ react-native-google-maps-directions@^2.1.1:
   resolved "https://registry.yarnpkg.com/react-native-google-maps-directions/-/react-native-google-maps-directions-2.1.1.tgz#d27c38508174bd4009adebc1517eff852901c13b"
   integrity sha512-hsq2T3cJsZZ31akEq08nBCdRlYQ+o+07R7wTb9QclrTQHJRIKR78mI9lgizOpKm4NFSYUOxGtbL7LfhJw1OANQ==
 
-react-native-google-places-autocomplete@^1.3.9:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-google-places-autocomplete/-/react-native-google-places-autocomplete-1.4.0.tgz#9ffee5e542f46353825bb532e116360596ae792c"
-  integrity sha512-+D3s8z+BMT24X19yxjRp5uZYPP7mTQ3v318QNI5N+0oYbSsq7HZ/8hXk55kxVUaFjm/Cn3mPjuWV49Rf+QwPFw==
+react-native-google-places-autocomplete@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-google-places-autocomplete/-/react-native-google-places-autocomplete-1.9.0.tgz#d88bdbb78ca78d5223e1fdf8701d75625f2a2833"
+  integrity sha512-gYWwI6ZeCxW8zkknMPcQ8oSGe5vckNFagIrGx9Fpqf4j/CAoxAYm7gHrHvipTLLKtEIhwlK3gb4VntyQg4bwmw==
   dependencies:
     lodash.debounce "^4.0.8"
     prop-types "^15.5.10"
-    qs "^5.2.0"
+    qs "~6.9.1"
 
 react-native-google-places@^3.1.2:
   version "3.1.2"
